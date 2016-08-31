@@ -12,12 +12,29 @@ public class LeaderBoardScript : MonoBehaviour
 	public InputField inputField;
 	public Text[] nameDisplay = new Text[10];
 	public GameObject nameDisplayCanvas;
+	public Canvas pauseText;
+
 
 
 	// Use this for initialization
 	public void Start ()
 	{
+		pauseText.enabled = false;
 		nameDisplayCanvas.SetActive (false);
+
+	}
+
+	void Update ()
+	{
+		if (Input.GetKeyDown (KeyCode.P)) {
+			pauseText.enabled = !pauseText.enabled;
+		}
+
+		if (pauseText.enabled == true)
+			Time.timeScale = 0f;
+		else
+		//if (pauseText.enabled == false)
+			Time.timeScale = 1f;
 	}
 
 	public void TextDisplay (string value)
@@ -35,6 +52,11 @@ public class LeaderBoardScript : MonoBehaviour
 		}
 
 
+	}
+
+	public void QuitGame ()
+	{
+		Application.Quit ();
 	}
 
 

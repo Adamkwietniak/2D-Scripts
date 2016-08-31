@@ -23,10 +23,13 @@ public class SpawnWavesScript : MonoBehaviour
 	[HideInInspector]public int score;
 	[HideInInspector]public int[] highScores = new int [10];
 	string highScoreKey = "";
-	private int numberForSpawn;
+	[HideInInspector]public int numberForSpawn;
 	public GameObject highscoreTable;
 	public GameObject nameDisplayCanvas;
 	public Button backButton;
+	public Text scoreDiaplay;
+
+
 
 
 
@@ -149,6 +152,7 @@ public class SpawnWavesScript : MonoBehaviour
 			if (gameOver == true) {
 				highscoreTable.SetActive (true);
 				nameDisplayCanvas.SetActive (true);
+				scoreDiaplay.text = "You score: " + score;
 				restartText.text = "Press R to restart!";
 				restart = true;
 				break;

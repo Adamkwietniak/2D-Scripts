@@ -8,6 +8,7 @@ public class KamikadzeShipScript : MonoBehaviour
 	private float speed;
 	public GameObject turbo;
 	private AudioSource turboSound;
+	SpawnWavesScript sws;
 
 	// Use this for initialization
 	void Start ()
@@ -18,8 +19,18 @@ public class KamikadzeShipScript : MonoBehaviour
 		rb.velocity = transform.forward * speed;
 		Invoke ("Kamikadze", 1);
 		turboSound = GetComponent<AudioSource> ();
+		GameObject spawnControllerObject = GameObject.Find ("Spawns");
+		sws = spawnControllerObject.GetComponent<SpawnWavesScript> ();
 
 
+	}
+
+	void Update ()
+	{
+		if (sws.numberForSpawn == 60) {
+
+			speed -= -3;
+		}
 	}
 
 	void Kamikadze ()
