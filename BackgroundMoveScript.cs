@@ -13,7 +13,7 @@ public class BackgroundMoveScript : MonoBehaviour
 	void Start ()
 	{
 		startPosition = transform.position;
-		moveSpeed = -0.7f;
+		moveSpeed = -1.2f;
 		tileSizeZ = 30f;
 		GameObject spawnControllerObject = GameObject.Find ("Spawns");
 		sws = spawnControllerObject.GetComponent<SpawnWavesScript> ();
@@ -25,7 +25,7 @@ public class BackgroundMoveScript : MonoBehaviour
 		float newPosition = Mathf.Repeat (Time.time * moveSpeed, tileSizeZ);
 		transform.position = startPosition + Vector3.forward * newPosition;
 		if (sws.numberForSpawn == 60) {
-			moveSpeed = -1.0f;
+			moveSpeed = -1.8f;
 		}
 	}
 

@@ -30,8 +30,7 @@ public class PlayerControllerTWODScript : MonoBehaviour
 	[HideInInspector]public bool stopFirstSpawn;
 	[HideInInspector]public int shotSpawnsIndex;
 
-
-
+	UnityStandardAssets.ImageEffects.MotionBlur mb;
 
 	// Use this for initialization
 	void Start ()
@@ -39,20 +38,25 @@ public class PlayerControllerTWODScript : MonoBehaviour
 		rb = GetComponent<Rigidbody> ();	
 		audSrc = GetComponent<AudioSource> ();
 		shotSpawnsIndex = 0;
-
-
+		mb = FindObjectOfType<UnityStandardAssets.ImageEffects.MotionBlur> ();
+		mb.blurAmount = 0f;
 	}
-	
+
+
+
 	// Update is called once per frame
 	void Update ()
 	{
 
-
+		//Debug.Log (shotSpawnsIndex);
 		
 		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
-			if (stopFirstSpawn == false /*pus.shotSpawnsIndex == 0 || pus.shotSpawnsIndex == 2*/)
+			if (stopFirstSpawn == false /*pus.shotSpawnsIndex == 0 || pus.shotSpawnsIndex == 2*/) {
 				Instantiate (shot, shotSpawn [0].position, shotSpawn [0].rotation);
+
+			}
+				
 
 			if (shotSpawnsIndex == 1) {
 				stopFirstSpawn = true;
@@ -85,30 +89,12 @@ public class PlayerControllerTWODScript : MonoBehaviour
 			audSrc.Play ();
 		}
 
-		/*if (Input.GetKey (KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) 
-		{
-			if ((Time.time - lastTimeTap) < tapSpeed) 
-			{
-				//rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -dodge);
-				//player.GetComponent<Transform>().RotateAround(Vector3.zero, axis, angle * Time.deltaTime / time);
-				//player.transform.Rotate(Vector3.up * Time.deltaTime * speed * -30f);
-				//player.transform.Rotate(Vector3.forward * 0.5f * Time.deltaTime);
-
-				//dodgeAnim.enabled = true;
-				//dodgeAnim.SetBool ("Dodge", true);
-
-
-			}
-			lastTimeTap = Time.time;
+		if (Input.GetAxisRaw ("Vertical") > 0 || Input.GetAxisRaw ("Vertical") < 0) {
+			mb.blurAmount = 0.7f;	
+		} else {
+			mb.blurAmount = 0f;
 		}
-		if (Input.GetKeyDown (KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D)) 
-		{
-			if ((Time.time - lastTimeTap) < tapSpeed) 
-			{
-				//rb.rotation = Quaternion.Euler (0.0f, 0.0f, rb.velocity.x * -dodge);
-			}
-			lastTimeTap = Time.time;
-		}*/
+			
 
 	}
 

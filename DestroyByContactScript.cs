@@ -8,6 +8,7 @@ public class DestroyByContactScript : MonoBehaviour
 	public GameObject playerExplosion;
 	SpawnWavesScript sws;
 	public int scoreValue;
+	PlayerControllerTWODScript pctwods;
 
 
 
@@ -15,7 +16,7 @@ public class DestroyByContactScript : MonoBehaviour
 	{
 		GameObject spawnControllerObject = GameObject.Find ("Spawns");
 		sws = spawnControllerObject.GetComponent<SpawnWavesScript> ();
-
+		pctwods = FindObjectOfType <PlayerControllerTWODScript> ();
 
 	}
 
@@ -23,7 +24,8 @@ public class DestroyByContactScript : MonoBehaviour
 	void OnTriggerEnter (Collider other)
 	{
 		
-		if (other.tag == "Boundary" || other.tag == "Enemy") {
+		
+		if (other.tag == "Boundary" /*|| other.tag == "Enemy"*/) {
 			return;
 
 		}
@@ -32,15 +34,18 @@ public class DestroyByContactScript : MonoBehaviour
 			Instantiate (explosion, transform.position, transform.rotation);
 
 		}
-		if (other.tag == "Player") {
+		if (other.tag == "Player" && pctwods.shotSpawnsIndex == 0) {
 			Instantiate (playerExplosion, other.transform.position, other.transform.rotation);
 			GameObject.Find ("Player2D").SetActive (false);
+			GameObject.Find ("shotspawns").SetActive (false);
 			sws.GameOver ();
-
+			Destroy (other.gameObject);
+		} else if (other.tag == "Player" && pctwods.shotSpawnsIndex > 0) {
+			pctwods.shotSpawnsIndex--;
 		}
 
 
-		Destroy (other.gameObject);
+
 		Destroy (gameObject);
 		sws.AddScore (scoreValue);
 

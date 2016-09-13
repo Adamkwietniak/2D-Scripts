@@ -28,6 +28,7 @@ public class SpawnWavesScript : MonoBehaviour
 	public GameObject nameDisplayCanvas;
 	public Button backButton;
 	public Text scoreDiaplay;
+	PlayerControllerTWODScript pctwods;
 
 
 
@@ -54,6 +55,7 @@ public class SpawnWavesScript : MonoBehaviour
 		spawnStart = 2;
 		waveWait = 5;
 		highscoreTable.SetActive (false);
+		pctwods = FindObjectOfType <PlayerControllerTWODScript> ();
 
 	}
 
@@ -80,6 +82,8 @@ public class SpawnWavesScript : MonoBehaviour
 
 	void Update ()
 	{
+
+
 		if (restart == true) {
 			if (Input.GetKeyDown (KeyCode.R)) {
 				SceneManager.LoadScene ("Scene2D");
@@ -176,9 +180,6 @@ public class SpawnWavesScript : MonoBehaviour
 	{
 		gameOverText.text = "Game Over!";
 		gameOver = true;
-
-
-
 	}
 
 	public void BackButton ()
