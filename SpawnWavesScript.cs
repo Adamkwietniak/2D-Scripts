@@ -29,7 +29,8 @@ public class SpawnWavesScript : MonoBehaviour
 	public Button backButton;
 	public Text scoreDiaplay;
 	PlayerControllerTWODScript pctwods;
-
+	private int targetScoreToBonus;
+	public Text bonusText;
 
 
 
@@ -43,7 +44,9 @@ public class SpawnWavesScript : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
+		
 		score = 0;
+		bonusText.enabled = false;
 		StartCoroutine (SpawnWaves ());
 		UpdateScore ();
 		gameOver = false;
@@ -56,6 +59,8 @@ public class SpawnWavesScript : MonoBehaviour
 		waveWait = 5;
 		highscoreTable.SetActive (false);
 		pctwods = FindObjectOfType <PlayerControllerTWODScript> ();
+
+
 
 	}
 
@@ -72,39 +77,18 @@ public class SpawnWavesScript : MonoBehaviour
 				int temp = highScores [i];
 				score = temp;
 			}
-
-
-
-
 		}
 	}
 
 
+
 	void Update ()
 	{
-
-
-		if (restart == true) {
-			if (Input.GetKeyDown (KeyCode.R)) {
-				SceneManager.LoadScene ("Scene2D");
-
-			}
-
-		}
-
-		scoreText.text = "Score:" + score.ToString ();
-
-		if (Input.GetKeyDown (KeyCode.C)) {
-			PlayerPrefs.DeleteAll ();	
-		}
-
-
 		if (numberForSpawn == 10) {
 			spawnWait = 0.8f;
 			spawnStart = 1.5f;
 			waveWait = 4f;
 			hazardCounts = 4;
-
 		}
 
 		if (numberForSpawn == 35) {
@@ -127,6 +111,32 @@ public class SpawnWavesScript : MonoBehaviour
 			waveWait = 1f;
 			hazardCounts = 12;
 		}
+		/*Debug.Log (targetScoreToBonus);
+		//targetScoreToBonus = score % 100;
+		targetScoreToBonus = score % 101;
+		if (targetScoreToBonus == 100) {
+			bonusText.enabled = true;
+			pctwods.shotSpawnsIndex += 1;
+
+			//pctwods.shotSpawnsIndex++;
+		}*/
+
+		if (restart == true) {
+			if (Input.GetKeyDown (KeyCode.R)) {
+				SceneManager.LoadScene ("Scene2D");
+
+			}
+
+		}
+
+		scoreText.text = "Score:" + score.ToString ();
+
+		if (Input.GetKeyDown (KeyCode.C)) {
+			PlayerPrefs.DeleteAll ();	
+		}
+
+
+
 
 	}
 

@@ -21,14 +21,12 @@ public class PlayerControllerTWODScript : MonoBehaviour
 	// prefab pocisku
 	public Transform[] shotSpawn = new Transform[5];
 	// miejsca, z których wylatuje pocisk
-	//[HideInInspector] public int shotSpawnIndex = 0;
 	public float fireRate;
 	// ile strzałów
 	private AudioSource audSrc;
 	private float nextFire;
-	//PowerUpScript pus;
-	[HideInInspector]public bool stopFirstSpawn;
 	[HideInInspector]public int shotSpawnsIndex;
+
 
 	UnityStandardAssets.ImageEffects.MotionBlur mb;
 
@@ -52,33 +50,32 @@ public class PlayerControllerTWODScript : MonoBehaviour
 		
 		if (Input.GetButton ("Fire1") && Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
-			if (stopFirstSpawn == false /*pus.shotSpawnsIndex == 0 || pus.shotSpawnsIndex == 2*/) {
+			if (shotSpawnsIndex == 0) {
 				Instantiate (shot, shotSpawn [0].position, shotSpawn [0].rotation);
 
 			}
 				
 
 			if (shotSpawnsIndex == 1) {
-				stopFirstSpawn = true;
 				Instantiate (shot, shotSpawn [1].transform.position, shotSpawn [1].transform.rotation);
 				Instantiate (shot, shotSpawn [2].transform.position, shotSpawn [2].transform.rotation);
 			}
 
 			if (shotSpawnsIndex == 2) {
-				stopFirstSpawn = false;
+				Instantiate (shot, shotSpawn [0].position, shotSpawn [0].rotation);
 				Instantiate (shot, shotSpawn [1].transform.position, shotSpawn [1].transform.rotation);
 				Instantiate (shot, shotSpawn [2].transform.position, shotSpawn [2].transform.rotation);
 			}
 
 			if (shotSpawnsIndex == 3) {
-				stopFirstSpawn = false;
+				Instantiate (shot, shotSpawn [0].position, shotSpawn [0].rotation);
 				Instantiate (shot, shotSpawn [1].transform.position, shotSpawn [1].transform.rotation);
 				Instantiate (shot, shotSpawn [2].transform.position, shotSpawn [2].transform.rotation);
 				Instantiate (shot, shotSpawn [3].transform.position, shotSpawn [3].transform.rotation);
 			}
 
 			if (shotSpawnsIndex >= 4) {
-				stopFirstSpawn = false;
+				Instantiate (shot, shotSpawn [0].position, shotSpawn [0].rotation);
 				Instantiate (shot, shotSpawn [1].transform.position, shotSpawn [1].transform.rotation);
 				Instantiate (shot, shotSpawn [2].transform.position, shotSpawn [2].transform.rotation);
 				Instantiate (shot, shotSpawn [3].transform.position, shotSpawn [3].transform.rotation);

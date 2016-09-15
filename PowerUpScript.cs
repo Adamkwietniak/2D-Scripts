@@ -27,10 +27,13 @@ public class PowerUpScript : MonoBehaviour
 	{
 		if (other.tag == "Player") {
 
-			pcts.shotSpawnsIndex++;
+
 			Destroy (gameObject, 0.1f);
 			sws.AddScore (scoreValue);
 			powerUpSource.PlayOneShot (powerUpSound);
+		}
+		if (other.tag == "Player" && pcts.shotSpawnsIndex < 4) {
+			pcts.shotSpawnsIndex++;
 		}
 
 	}

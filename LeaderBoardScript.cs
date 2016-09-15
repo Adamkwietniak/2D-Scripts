@@ -13,15 +13,18 @@ public class LeaderBoardScript : MonoBehaviour
 	public Text[] nameDisplay = new Text[10];
 	public GameObject nameDisplayCanvas;
 	public Canvas pauseText;
-
+	public Text playerLifes;
+	PlayerControllerTWODScript pctwods;
+	public GameObject infoPanel;
 
 
 	// Use this for initialization
 	public void Start ()
 	{
 		pauseText.enabled = false;
+		infoPanel.SetActive (false);
 		nameDisplayCanvas.SetActive (false);
-
+		pctwods = FindObjectOfType <PlayerControllerTWODScript> ();
 
 	}
 
@@ -31,11 +34,13 @@ public class LeaderBoardScript : MonoBehaviour
 			pauseText.enabled = !pauseText.enabled;
 		}
 
-		if (pauseText.enabled == true)
+		if (pauseText.enabled == true) {
 			Time.timeScale = 0f;
-		else
+		} else {
 			Time.timeScale = 1f;
-
+			infoPanel.SetActive (false);
+		}
+		playerLifes.text = "X" + pctwods.shotSpawnsIndex;
 
 	}
 
@@ -63,6 +68,16 @@ public class LeaderBoardScript : MonoBehaviour
 	public void QuitGame ()
 	{
 		Application.Quit ();
+	}
+
+	public void InformationButton ()
+	{
+		infoPanel.SetActive (true);
+	}
+
+	public void BackFromInfoCanvas ()
+	{
+		infoPanel.SetActive (false);
 	}
 
 

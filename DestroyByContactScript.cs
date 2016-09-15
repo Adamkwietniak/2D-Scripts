@@ -25,7 +25,7 @@ public class DestroyByContactScript : MonoBehaviour
 	{
 		
 		
-		if (other.tag == "Boundary" /*|| other.tag == "Enemy"*/) {
+		if (other.tag == "Boundary" || other.tag == "Enemy") {
 			return;
 
 		}
