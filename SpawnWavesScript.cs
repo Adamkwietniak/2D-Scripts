@@ -84,33 +84,7 @@ public class SpawnWavesScript : MonoBehaviour
 
 	void Update ()
 	{
-		if (numberForSpawn == 10) {
-			spawnWait = 0.8f;
-			spawnStart = 1.5f;
-			waveWait = 4f;
-			hazardCounts = 4;
-		}
 
-		if (numberForSpawn == 35) {
-			spawnWait = 0.5f;
-			spawnStart = 1f;
-			waveWait = 3f;
-			hazardCounts = 6;
-
-		}
-		if (numberForSpawn == 50) {
-			spawnWait = 0.2f;
-			spawnStart = 0.5f;
-			waveWait = 2.5f;
-			hazardCounts = 10;
-
-		}
-		if (numberForSpawn == 100) {
-			spawnWait = 0.1f;
-			spawnStart = 0.1f;
-			waveWait = 1f;
-			hazardCounts = 12;
-		}
 		/*Debug.Log (targetScoreToBonus);
 		//targetScoreToBonus = score % 100;
 		targetScoreToBonus = score % 101;
@@ -160,6 +134,29 @@ public class SpawnWavesScript : MonoBehaviour
 				yield return new WaitForSeconds (spawnWait);
 				if (numberForSpawn < 100) {
 					numberForSpawn++;
+					if (numberForSpawn == 10) {
+						spawnWait = 0.8f;
+						spawnStart = 1.5f;
+						waveWait = 4f;
+						hazardCounts = 4;
+					} else if (numberForSpawn == 35) {
+						spawnWait = 0.5f;
+						spawnStart = 1f;
+						waveWait = 3f;
+						hazardCounts = 6;
+
+					} else if (numberForSpawn == 50) {
+						spawnWait = 0.2f;
+						spawnStart = 0.5f;
+						waveWait = 2.5f;
+						hazardCounts = 10;
+
+					} else if (numberForSpawn == 100) {
+						spawnWait = 0.1f;
+						spawnStart = 0.1f;
+						waveWait = 1f;
+						hazardCounts = 12;
+					}
 				}
 			}
 			yield return new WaitForSeconds (waveWait);
